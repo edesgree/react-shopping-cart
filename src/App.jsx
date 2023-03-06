@@ -15,6 +15,7 @@ function App() {
         <Route index element={<Home />} />
         <Route path="products/*" element={<Products />} />
         <Route path="products/:productName" element={<Product />} />
+        <Route path="product/" element={<Product />} />
         <Route path="cart" element={<Cart />} />
 
         {/* Using path="*"" means "match anything", so this route

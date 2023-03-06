@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { useParams } from 'react-router-dom';
 export default function Product(props) {
   // get params from Route in App ('/products/:productName')
   const { productName } = useParams();
@@ -7,9 +7,7 @@ export default function Product(props) {
     <section>
       <div className="relative mx-auto max-w-screen-xl px-4 py-8">
         <div>
-          <h1 className="text-2xl font-bold lg:text-3xl">
-            Simple Clothes Basic Tee
-          </h1>
+          <h1 className="text-2xl font-bold lg:text-3xl">{productName}</h1>
 
           <p className="mt-1 text-sm text-gray-500">SKU: #012345</p>
         </div>

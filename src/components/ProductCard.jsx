@@ -1,8 +1,9 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 export default function ProductCard(props) {
   return (
-    <a href={props.name} className="block overflow-hidden group">
+    <NavLink to={props.name} className="block overflow-hidden group">
       <img
         src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
         alt=""
@@ -20,6 +21,6 @@ export default function ProductCard(props) {
           <span className="tracking-wider text-gray-900"> £24.00 GBP </span>
         </p>
       </div>
-    </a>
+    </NavLink>
   );
 }

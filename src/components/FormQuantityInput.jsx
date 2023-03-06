@@ -13,7 +13,7 @@ export default function FormQuantityInput(props) {
           type="button"
           className="h-10 w-10 leading-10 text-gray-600 transition hover:opacity-75"
         >
-          &minus;
+          -
         </button>
 
         <span>
@@ -29,7 +29,7 @@ export default function FormQuantityInput(props) {
           type="button"
           className="h-10 w-10 leading-10 text-gray-600 transition hover:opacity-75"
         >
-          &plus;
+          +
         </button>
       </div>
     </div>

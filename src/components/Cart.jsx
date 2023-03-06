@@ -1,5 +1,5 @@
 import React from 'react';
-
+import FormQuantityInput from './FormQuantityInput';
 export default function Cart(props) {
   return (
     <section>
@@ -38,18 +38,7 @@ export default function Cart(props) {
 
                 <div className="flex flex-1 items-center justify-end gap-2">
                   <form>
-                    <label for="Line1Qty" className="sr-only">
-                      {' '}
-                      Quantity{' '}
-                    </label>
-
-                    <input
-                      type="number"
-                      min="1"
-                      value="1"
-                      id="Line1Qty"
-                      className="h-8 w-12 rounded border-gray-200 bg-gray-50 p-0 text-center text-xs text-gray-600 [-moz-appearance:_textfield] focus:outline-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
-                    />
+                    <FormQuantityInput />
                   </form>
 
                   <button className="text-gray-600 transition hover:text-red-600">
@@ -98,18 +87,7 @@ export default function Cart(props) {
 
                 <div className="flex flex-1 items-center justify-end gap-2">
                   <form>
-                    <label for="Line2Qty" className="sr-only">
-                      {' '}
-                      Quantity{' '}
-                    </label>
-
-                    <input
-                      type="number"
-                      min="1"
-                      value="1"
-                      id="Line2Qty"
-                      className="h-8 w-12 rounded border-gray-200 bg-gray-50 p-0 text-center text-xs text-gray-600 [-moz-appearance:_textfield] focus:outline-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
-                    />
+                    <FormQuantityInput />
                   </form>
 
                   <button className="text-gray-600 transition hover:text-red-600">
@@ -158,18 +136,7 @@ export default function Cart(props) {
 
                 <div className="flex flex-1 items-center justify-end gap-2">
                   <form>
-                    <label for="Line3Qty" className="sr-only">
-                      {' '}
-                      Quantity{' '}
-                    </label>
-
-                    <input
-                      type="number"
-                      min="1"
-                      value="1"
-                      id="Line3Qty"
-                      className="h-8 w-12 rounded border-gray-200 bg-gray-50 p-0 text-center text-xs text-gray-600 [-moz-appearance:_textfield] focus:outline-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
-                    />
+                    <FormQuantityInput />
                   </form>
 
                   <button className="text-gray-600 transition hover:text-red-600">
