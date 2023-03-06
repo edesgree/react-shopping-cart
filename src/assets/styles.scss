@@ -1,5 +1,18 @@
-* {
-  box-sizing: border-box;
+//tailwind imports
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .no-spinner {
+    -moz-appearance: textfield;
+  }
+
+  .no-spinner::-webkit-outer-spin-button,
+  .no-spinner::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 }
 
 $green: #94d7a2;
@@ -13,6 +26,7 @@ $light-yellow: #fffad1;
 $grey: #888;
 $purple: rgb(147 30 140);
 $cyan: #00ffb8;
+
 body {
   align-items: center;
   background: $dark-white;
@@ -38,53 +52,6 @@ main {
   min-width: 250px;
   padding: 20px;
   text-align: center;
-}
-
-p {
-  text-align: center;
-}
-button {
-  background-color: transparent;
-  border: solid 1px $dark-blue;
-
-  border-radius: 7px;
-  //box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.15);
-  cursor: pointer;
-  font-size: 1em;
-  font-weight: bold;
-  padding: 10px 20px;
-  &:hover {
-    background: $light-blue;
-  }
-  &.primary {
-    background: $purple;
-    border: none;
-    color: white;
-    &:hover {
-      background: $dark-blue;
-      color: white;
-    }
-  }
-  &.active {
-    background-color: $light-blue;
-    border: none;
-  }
-  &.desactive {
-    &,
-    &:hover {
-      background-color: transparent;
-      border-color: $light-blue;
-      color: $grey;
-    }
-
-    &.correct {
-      background-color: $green;
-      color: $dark-blue;
-    }
-    &.wrong {
-      background-color: $pink;
-    }
-  }
 }
 
 h1 {
