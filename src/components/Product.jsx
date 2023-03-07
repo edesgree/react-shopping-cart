@@ -1,13 +1,21 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 export default function Product(props) {
-  // get params from Route in App ('/products/:productName')
-  const { productName } = useParams();
+  // get params from Route in App ('/products/:productId')
+  const { productId } = useParams();
+  // get corresponding data for this product
+  console.log('dddd', props.products);
+  const currentProduct = props.products.filter(
+    (product) => product.id === parseInt(productId)
+  );
+
   return (
     <section>
       <div className="relative mx-auto max-w-screen-xl px-4 py-8">
         <div>
-          <h1 className="text-2xl font-bold lg:text-3xl">{productName}</h1>
+          <h1 className="text-2xl font-bold lg:text-3xl">
+            {currentProduct[0].title}
+          </h1>
 
           <p className="mt-1 text-sm text-gray-500">SKU: #012345</p>
         </div>
@@ -17,7 +25,7 @@ export default function Product(props) {
             <div className="relative mt-4">
               <img
                 alt="Tee"
-                src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+                src={currentProduct[0].image}
                 className="h-72 w-full rounded-xl object-cover lg:h-[540px]"
               />
 
@@ -189,7 +197,7 @@ export default function Product(props) {
               </div>
 
               <div>
-                <p className="text-xl font-bold">$19.99</p>
+                <p className="text-xl font-bold">${currentProduct[0].price}</p>
               </div>
 
               <button
@@ -210,15 +218,7 @@ export default function Product(props) {
 
           <div className="lg:col-span-3">
             <div className="prose max-w-none">
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam
-                totam eos iusto repellat blanditiis voluptate aspernatur, quae
-                nemo exercitationem cum debitis! Sint consectetur laborum
-                tempora repellat odit. Impedit quasi reprehenderit harum illum
-                sequi provident soluta cum quisquam odit possimus? Officia illum
-                saepe magnam nostrum, officiis placeat iure itaque cumque
-                voluptate?
-              </p>
+              <p>{currentProduct[0].description}</p>
             </div>
           </div>
         </div>
