@@ -1,18 +1,21 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-export default function ProductCard(props) {
+export default function ProductCard({ product }) {
   return (
-    <NavLink to={`${props.id}`} className="block overflow-hidden group">
+    <NavLink
+      to={`/products/${product.id}`}
+      className="block overflow-hidden group"
+    >
       <img
-        src={props.image}
-        alt={props.title}
+        src={product.image}
+        alt={product.title}
         className="h-[350px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[450px]"
       />
 
       <div className="relative pt-3 bg-white">
         <h3 className="text-xs text-gray-700 group-hover:underline group-hover:underline-offset-4">
-          {props.title}
+          {product.title}
         </h3>
 
         <p className="mt-2">
@@ -20,7 +23,7 @@ export default function ProductCard(props) {
 
           <span className="tracking-wider text-gray-900">
             {' '}
-            £{props.price} GBP{' '}
+            £{product.price} GBP{' '}
           </span>
         </p>
       </div>

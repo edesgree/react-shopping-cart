@@ -15,6 +15,7 @@ function App() {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [cart, setCart] = useState([]);
+  const [cartCount, setCartCount] = useState(0);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   const PRODUCTS_AMOUNT = 10;
@@ -25,7 +26,54 @@ function App() {
     const products = await response.json();
     return products;
   };
-
+  const handleAddToCart = (product) => {
+    //update cart item quantity if already in cart
+    if (cart.some((cartItem) => cartItem.id === product.id)) {
+      console.log('already in cart');
+      setCart((cart) =>
+        cart.map((cartItem) =>
+          cartItem.id === product.id
+            ? {
+                ...cartItem,
+                amount: cartItem.amount + 1
+              }
+            : cartItem
+        )
+      );
+    } else {
+      // Add to cart
+      console.log('no in cart yet');
+      setCart([
+        ...cart,
+        { ...product, amount: 1 } // initial amount 1
+      ]);
+      setCartCount((cartCount) => cartCount + 1);
+    }
+    console.log('cart', cart);
+    console.log('cartCount', cartCount);
+  };
+  const handleUpdateQty = (productId, number) => {
+    setCart((cart) =>
+      cart.flatMap((cartItem) =>
+        cartItem.id === productId
+          ? cartItem.amount + number < 1
+            ? [] // remove item if amount is less than 1
+            : [
+                {
+                  ...cartItem,
+                  amount: cartItem.amount + number
+                }
+              ]
+          : [cartItem]
+      )
+    );
+  };
+  const getCartCount = () => {
+    let totalCount = 0;
+    cart.map((item) => (totalCount += item.amount));
+    console.log('totalCount', totalCount);
+    return totalCount;
+  };
   useEffect(() => {
     async function fetchData() {
       const data = await fetchProducts();
@@ -39,11 +87,13 @@ function App() {
     }
     fetchData();
   }, []);
-
+  useEffect(() => {
+    setCartCount(getCartCount());
+  }, [cart]);
   return (
     <Suspense fallback={<Loading />}>
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route path="/" element={<Layout cartCount={cartCount} />}>
           <Route index element={<Home />} />
 
           <Route
@@ -61,10 +111,21 @@ function App() {
           />
           <Route
             path="products/:productId"
-            element={<Product products={products} />}
+            element={
+              <Product products={products} handleAddToCart={handleAddToCart} />
+            }
           />
-          <Route path="product/" element={<Product />} />
-          <Route path="cart" element={<Cart />} />
+
+          <Route
+            path="cart"
+            element={
+              <Cart
+                cart={cart}
+                setCart={setCart}
+                handleUpdateQty={handleUpdateQty}
+              />
+            }
+          />
           <Route path="*" element={<NoMatch />} />
         </Route>
       </Routes>

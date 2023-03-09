@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-export default function Header(props) {
+export default function Header({ cartCount }) {
   const navigation = [
     { title: 'Home', path: '/' },
     { title: 'Products', path: '/products' },
@@ -68,6 +68,7 @@ export default function Header(props) {
             </ul>
           </div>
           <div className="hidden md:inline-block">
+            cartcount:{cartCount}
             <a
               href=""
               className="py-3 px-4 text-white bg-indigo-600 hover:bg-indigo-700 rounded-md shadow"

@@ -23,7 +23,7 @@ export default function Products({
   const productsElements = filteredProducts.map((product) => {
     return (
       <li key={product.id}>
-        <ProductCard key={product.id} {...product} />
+        <ProductCard key={product.id} product={product} />
       </li>
     );
   });

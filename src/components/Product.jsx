@@ -1,16 +1,28 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-export default function Product(props) {
+import Loading from './Ui/Loading';
+export default function Product({ products, handleAddToCart }) {
   // get params from Route in App ('/products/:productId')
-  const { productId } = useParams();
+  const { productId, productTitle } = useParams();
   // get corresponding data for this product
 
-  const currentProduct = props.products.filter(
+  const currentProduct = products.find(
     (product) => product.id === parseInt(productId)
   );
 
   return (
-    <section>
+    <>
+      {currentProduct.title ? (
+        <section>
+          {currentProduct.title}
+          <button
+            type="button"
+            className="w-full rounded bg-red-700 px-6 py-3 text-sm font-bold uppercase tracking-wide text-white"
+            onClick={() => handleAddToCart(currentProduct)}
+          >
+            Add to cart
+          </button>
+          {/* 
       <div className="relative mx-auto max-w-screen-xl px-4 py-8">
         <div>
           <h1 className="text-2xl font-bold lg:text-3xl">
@@ -20,13 +32,13 @@ export default function Product(props) {
           <p className="mt-1 text-sm text-gray-500">SKU: #012345</p>
         </div>
 
-        <div className="grid gap-8 lg:grid-cols-4 lg:items-start">
-          <div className="lg:col-span-3">
+        <div className="grid gap-8 md:grid-cols-4 md:items-start">
+          <div className="md:col-span-3">
             <div className="relative mt-4">
               <img
-                alt="Tee"
+                alt={currentProduct[0].title}
                 src={currentProduct[0].image}
-                className="h-72 w-full rounded-xl object-cover lg:h-[540px]"
+                className="h-72 w-full rounded-xl object-cover md:h-[540px]"
               />
 
               <div className="absolute bottom-4 left-1/2 inline-flex -translate-x-1/2 items-center rounded-full bg-black/75 px-3 py-1.5 text-white">
@@ -84,8 +96,8 @@ export default function Product(props) {
             </ul>
           </div>
 
-          <div className="lg:sticky lg:top-0">
-            <form className="space-y-4 lg:pt-8">
+          <div className="md:sticky md:top-0">
+            <form className="space-y-4 md:pt-8">
               <fieldset>
                 <legend className="text-lg font-bold">Color</legend>
 
@@ -201,8 +213,9 @@ export default function Product(props) {
               </div>
 
               <button
-                type="submit"
+                type="button"
                 className="w-full rounded bg-red-700 px-6 py-3 text-sm font-bold uppercase tracking-wide text-white"
+                onClick={() => handleAddToCart(currentProduct)}
               >
                 Add to cart
               </button>
@@ -216,13 +229,18 @@ export default function Product(props) {
             </form>
           </div>
 
-          <div className="lg:col-span-3">
+          <div className="md:col-span-3">
             <div className="prose max-w-none">
               <p>{currentProduct[0].description}</p>
             </div>
           </div>
         </div>
       </div>
-    </section>
+      */}
+        </section>
+      ) : (
+        <Loading />
+      )}
+    </>
   );
 }

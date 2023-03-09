@@ -1,16 +1,20 @@
 import React from 'react';
 
-export default function FormQuantityInput(props) {
+export default function FormQuantityInput({
+  productAmount,
+  productId,
+  handleUpdateQty
+}) {
   return (
     <div>
       <label for="Quantity" className="sr-only">
-        {' '}
-        Quantity{' '}
+        Quantity
       </label>
 
       <div className="flex items-center rounded border border-gray-200">
         <button
           type="button"
+          onClick={() => handleUpdateQty(productId, -1)}
           className="h-10 w-10 leading-10 text-gray-600 transition hover:opacity-75"
         >
           -
@@ -20,13 +24,14 @@ export default function FormQuantityInput(props) {
           <input
             type="number"
             id="Quantity"
-            value="1"
+            value={productAmount}
             className="h-10 w-16 border-y-0 border-gray-200 text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
           />
         </span>
 
         <button
           type="button"
+          onClick={() => handleUpdateQty(productId, 1)}
           className="h-10 w-10 leading-10 text-gray-600 transition hover:opacity-75"
         >
           +
