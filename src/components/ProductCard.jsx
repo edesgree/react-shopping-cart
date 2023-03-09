@@ -2,7 +2,6 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 export default function ProductCard(props) {
-  console.log('props', props);
   return (
     <NavLink to={`${props.id}`} className="block overflow-hidden group">
       <img

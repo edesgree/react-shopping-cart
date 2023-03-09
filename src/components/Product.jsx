@@ -4,7 +4,7 @@ export default function Product(props) {
   // get params from Route in App ('/products/:productId')
   const { productId } = useParams();
   // get corresponding data for this product
-  console.log('dddd', props.products);
+
   const currentProduct = props.products.filter(
     (product) => product.id === parseInt(productId)
   );

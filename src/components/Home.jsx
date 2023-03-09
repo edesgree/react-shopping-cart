@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { NavLink } from 'react-router-dom';
 export default function Footer(props) {
   return (
     <>
@@ -26,12 +26,12 @@ export default function Footer(props) {
                 repellat.
               </p>
 
-              <a
-                href="#"
+              <NavLink
+                to="/products"
                 className="mt-8 inline-block rounded bg-indigo-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-yellow-400"
               >
                 Browse the store
-              </a>
+              </NavLink>
             </div>
           </div>
         </div>

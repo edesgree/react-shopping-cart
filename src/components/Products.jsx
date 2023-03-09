@@ -1,17 +1,33 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import ProductCard from './ProductCard';
-export default function Products(props) {
-  const productsElements = props.products.map((product) => {
+import ProductsFilter from './ProductsFilter';
+export default function Products({
+  products,
+  categories,
+  filteredProducts,
+  setFilteredProducts
+}) {
+  const filterProduct = (category) => {
+    if (category === 'All') {
+      setFilteredProducts(products);
+    } else {
+      const filtered = products.filter((newProduct) => {
+        return newProduct.category === category;
+      });
+      setFilteredProducts(filtered);
+    }
+  };
+  const productsElements = filteredProducts.map((product) => {
     return (
       <li key={product.id}>
         <ProductCard key={product.id} {...product} />
       </li>
     );
   });
+
   return (
     <>
-      {props.products.title}
       <section>
         <div className="max-w-screen-xl px-4 py-8 mx-auto sm:px-6 sm:py-12 lg:px-8">
           <header>
@@ -26,6 +42,10 @@ export default function Products(props) {
             </p>
           </header>
 
+          <ProductsFilter
+            categories={categories}
+            filterProduct={filterProduct}
+          />
           <ul className="grid gap-4 mt-8 sm:grid-cols-2 lg:grid-cols-4">
             {productsElements}
           </ul>
