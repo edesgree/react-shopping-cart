@@ -8,7 +8,9 @@ export default function Products({
   filteredProducts,
   setFilteredProducts
 }) {
+  const [selectedCat, setSelectedCat] = React.useState('All');
   const filterProduct = (category) => {
+    setSelectedCat(category);
     if (category === 'All') {
       setFilteredProducts(products);
     } else {
@@ -45,6 +47,7 @@ export default function Products({
           <ProductsFilter
             categories={categories}
             filterProduct={filterProduct}
+            selectedCat={selectedCat}
           />
           <ul className="grid gap-4 mt-8 sm:grid-cols-2 lg:grid-cols-4">
             {productsElements}
