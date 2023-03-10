@@ -6,16 +6,16 @@ export default function FormQuantityInput({
   handleUpdateQty
 }) {
   return (
-    <div>
-      <label for="Quantity" className="sr-only">
+    <>
+      <label htmlFor="Quantity" className="sr-only">
         Quantity
       </label>
 
-      <div className="flex items-center rounded border border-gray-200">
+      <div className="flex items-center gap-1">
         <button
           type="button"
           onClick={() => handleUpdateQty(productId, -1)}
-          className="h-10 w-10 leading-10 text-gray-600 transition hover:opacity-75"
+          className="px-6 py-2 border rounded-md dark:border-violet-400"
         >
           -
         </button>
@@ -24,19 +24,20 @@ export default function FormQuantityInput({
           <input
             type="number"
             id="Quantity"
+            readOnly
             value={productAmount}
-            className="h-10 w-16 border-y-0 border-gray-200 text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
+            className="w-24 h-10 border-gray-200 rounded dark:border-gray-700 dark:bg-gray-800 dark:text-white sm:text-sm"
           />
         </span>
 
         <button
           type="button"
           onClick={() => handleUpdateQty(productId, 1)}
-          className="h-10 w-10 leading-10 text-gray-600 transition hover:opacity-75"
+          className="px-6 py-2 border rounded-md dark:border-violet-400"
         >
           +
         </button>
       </div>
-    </div>
+    </>
   );
 }

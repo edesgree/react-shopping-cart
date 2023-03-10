@@ -18,15 +18,21 @@ function App() {
   const [cartCount, setCartCount] = useState(0);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
-  const PRODUCTS_AMOUNT = 12;
+  const PRODUCTS_AMOUNT = 20;
 
   const fetchProducts = async (amount) => {
     const productUrl2 = `https://fakestoreapi.com/products?limit=${amount}`;
     const productUrl = `https://dummyjson.com/products?limit=${amount}`;
+
     const response = await fetch(productUrl);
+    if (!response.ok) {
+      const message = `An error has occured: ${response.status}`;
+      throw new Error(message);
+    }
     const products = await response.json();
-    console.log(products);
     return products.products;
+
+    console.log(products);
   };
   const handleAddToCart = (product) => {
     //update cart item quantity if already in cart
