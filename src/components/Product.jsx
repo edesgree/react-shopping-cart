@@ -1,242 +1,118 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import Loading from './Ui/Loading';
+import classNames from 'classnames';
 export default function Product({ products, handleAddToCart }) {
   // get params from Route in App ('/products/:productId')
   const { productId, productTitle } = useParams();
   // get corresponding data for this product
-
+  const [btnClick, setBtnClick] = React.useState(false);
+  //const [rating,setRating]=React.useState(currentProduct.rating)
   const currentProduct = products.find(
     (product) => product.id === parseInt(productId)
   );
+  const handleChangeButtonColor = (btn) => {
+    setBtnClick(true);
+    setTimeout(() => {
+      setBtnClick(false);
+    }, 1500);
+  };
 
+  const getRatings = (rating) => {
+    return Array.from({ length: 5 }, (_, i) => {
+      return (
+        <svg
+          className={`h-5 w-5 ${
+            i < Math.round(rating) ? 'text-yellow-400' : 'text-gray-200'
+          }`}
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          key={i}
+        >
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
+      );
+    });
+  };
   return (
     <>
       {currentProduct.title ? (
         <section>
-          {currentProduct.title}
-          <button
-            type="button"
-            className="w-full rounded bg-red-700 px-6 py-3 text-sm font-bold uppercase tracking-wide text-white"
-            onClick={() => handleAddToCart(currentProduct)}
-          >
-            Add to cart
-          </button>
-          {/* 
-      <div className="relative mx-auto max-w-screen-xl px-4 py-8">
-        <div>
-          <h1 className="text-2xl font-bold lg:text-3xl">
-            {currentProduct[0].title}
-          </h1>
+          <div className="relative mx-auto max-w-screen-xl px-4 py-8">
+            <div className="grid grid-cols-1 items-start gap-8 md:grid-cols-2">
+              <div className="grid grid-cols-2 gap-4 md:grid-cols-1">
+                <img
+                  alt={currentProduct.title}
+                  src={currentProduct.thumbnail}
+                  className="aspect-square w-full rounded-xl object-cover"
+                />
 
-          <p className="mt-1 text-sm text-gray-500">SKU: #012345</p>
-        </div>
+                <div className="grid grid-cols-2 gap-4 lg:mt-4">
+                  {currentProduct.images.slice(0, -1).map((image, i) => {
+                    return (
+                      <img
+                        key={i}
+                        alt={currentProduct.title}
+                        src={image}
+                        className="aspect-square w-full rounded-xl object-cover"
+                      />
+                    );
+                  })}
+                </div>
+              </div>
 
-        <div className="grid gap-8 md:grid-cols-4 md:items-start">
-          <div className="md:col-span-3">
-            <div className="relative mt-4">
-              <img
-                alt={currentProduct[0].title}
-                src={currentProduct[0].image}
-                className="h-72 w-full rounded-xl object-cover md:h-[540px]"
-              />
+              <div className="sticky top-0">
+                <strong className="rounded-full border border-blue-600 bg-gray-100 px-3 py-0.5 text-xs font-medium tracking-wide text-blue-600">
+                  {currentProduct.category}
+                </strong>
 
-              <div className="absolute bottom-4 left-1/2 inline-flex -translate-x-1/2 items-center rounded-full bg-black/75 px-3 py-1.5 text-white">
-                <svg
-                  className="h-4 w-4"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"
-                  />
-                </svg>
+                <div className="mt-8 flex justify-between">
+                  <div className="max-w-[35ch] space-y-2">
+                    <h1 className="text-xl font-bold sm:text-2xl">
+                      {currentProduct.title}
+                    </h1>
 
-                <span className="ml-1.5 text-xs"> Hover to zoom </span>
+                    <p className="text-sm">{currentProduct.brand}</p>
+
+                    <div className="-ml-0.5 flex">
+                      {getRatings(currentProduct.rating)}
+                    </div>
+                  </div>
+
+                  <p className="text-lg font-bold">${currentProduct.price}</p>
+                </div>
+
+                <div className="mt-4">
+                  <div className="prose max-w-none">
+                    <p>{currentProduct.description}</p>
+                  </div>
+                </div>
+
+                <form className="mt-8">
+                  <div className="mt-8 flex gap-4">
+                    <button
+                      onClick={(btn) => {
+                        btn.preventDefault();
+                        handleAddToCart(currentProduct);
+                        handleChangeButtonColor(btn);
+                      }}
+                      type="button"
+                      className={classNames(
+                        ' tracking-wide  overflow-hidden rounded relative inline-flex group items-center justify-center px-3.5 py-2 cursor-pointer border-b-4 border-l-2 active:border-red-600 active:bg-green-400	 active:shadow-none shadow-lg bg-gradient-to-tr from-red-600 to-red-500 border-red-700 text-white',
+                        {
+                          clicked: btnClick
+                        }
+                      )}
+                    >
+                      <span className="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-32 group-hover:h-32 opacity-10"></span>
+                      <span className="relative">Add to cart</span>
+                    </button>
+                  </div>
+                </form>
               </div>
             </div>
-
-            <ul className="mt-1 flex gap-1">
-              <li>
-                <img
-                  alt="Tee"
-                  src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-                  className="h-16 w-16 rounded-md object-cover"
-                />
-              </li>
-
-              <li>
-                <img
-                  alt="Tee"
-                  src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-                  className="h-16 w-16 rounded-md object-cover"
-                />
-              </li>
-
-              <li>
-                <img
-                  alt="Tee"
-                  src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-                  className="h-16 w-16 rounded-md object-cover"
-                />
-              </li>
-
-              <li>
-                <img
-                  alt="Tee"
-                  src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-                  className="h-16 w-16 rounded-md object-cover"
-                />
-              </li>
-            </ul>
           </div>
-
-          <div className="md:sticky md:top-0">
-            <form className="space-y-4 md:pt-8">
-              <fieldset>
-                <legend className="text-lg font-bold">Color</legend>
-
-                <div className="mt-2 flex flex-wrap gap-1">
-                  <label htmlFor="color_green" className="cursor-pointer">
-                    <input
-                      type="radio"
-                      id="color_green"
-                      name="color"
-                      className="peer sr-only"
-                      checked
-                    />
-
-                    <span className="block h-6 w-6 rounded-full border border-gray-200 bg-green-700 ring-1 ring-transparent ring-offset-1 peer-checked:ring-gray-300"></span>
-                  </label>
-
-                  <label htmlFor="color_blue" className="cursor-pointer">
-                    <input
-                      type="radio"
-                      id="color_blue"
-                      name="color"
-                      className="peer sr-only"
-                    />
-
-                    <span className="block h-6 w-6 rounded-full border border-gray-200 bg-blue-700 ring-1 ring-transparent ring-offset-1 peer-checked:ring-gray-300"></span>
-                  </label>
-
-                  <label htmlFor="color_pink" className="cursor-pointer">
-                    <input
-                      type="radio"
-                      id="color_pink"
-                      name="color"
-                      className="peer sr-only"
-                    />
-
-                    <span className="block h-6 w-6 rounded-full border border-gray-200 bg-pink-700 ring-1 ring-transparent ring-offset-1 peer-checked:ring-gray-300"></span>
-                  </label>
-
-                  <label htmlFor="color_red" className="cursor-pointer">
-                    <input
-                      type="radio"
-                      id="color_red"
-                      name="color"
-                      className="peer sr-only"
-                    />
-
-                    <span className="block h-6 w-6 rounded-full border border-gray-200 bg-red-700 ring-1 ring-transparent ring-offset-1 peer-checked:ring-gray-300"></span>
-                  </label>
-
-                  <label htmlFor="color_indigo" className="cursor-pointer">
-                    <input
-                      type="radio"
-                      id="color_indigo"
-                      name="color"
-                      className="peer sr-only"
-                    />
-
-                    <span className="block h-6 w-6 rounded-full border border-gray-200 bg-indigo-700 ring-1 ring-transparent ring-offset-1 peer-checked:ring-gray-300"></span>
-                  </label>
-                </div>
-              </fieldset>
-
-              <fieldset>
-                <legend className="text-lg font-bold">Material</legend>
-
-                <div className="mt-2 flex flex-wrap gap-1">
-                  <label htmlFor="material_cotton" className="cursor-pointer">
-                    <input
-                      type="radio"
-                      id="material_cotton"
-                      name="material"
-                      className="peer sr-only"
-                      checked
-                    />
-
-                    <span className="block rounded-full border border-gray-200 px-3 py-1 text-xs peer-checked:bg-gray-100">
-                      Cotton
-                    </span>
-                  </label>
-
-                  <label htmlFor="material_wool" className="cursor-pointer">
-                    <input
-                      type="radio"
-                      id="material_wool"
-                      name="material"
-                      className="peer sr-only"
-                      checked
-                    />
-
-                    <span className="block rounded-full border border-gray-200 px-3 py-1 text-xs peer-checked:bg-gray-100">
-                      Wool
-                    </span>
-                  </label>
-                </div>
-              </fieldset>
-
-              <div className="rounded border bg-gray-100 p-4">
-                <p className="text-sm">
-                  <span className="block">
-                    {' '}
-                    Pay as low as $3/mo with 0% APR.{' '}
-                  </span>
-
-                  <a href="" className="mt-1 inline-block underline">
-                    {' '}
-                    Find out more{' '}
-                  </a>
-                </p>
-              </div>
-
-              <div>
-                <p className="text-xl font-bold">${currentProduct[0].price}</p>
-              </div>
-
-              <button
-                type="button"
-                className="w-full rounded bg-red-700 px-6 py-3 text-sm font-bold uppercase tracking-wide text-white"
-                onClick={() => handleAddToCart(currentProduct)}
-              >
-                Add to cart
-              </button>
-
-              <button
-                type="button"
-                className="w-full rounded border border-gray-300 bg-gray-100 px-6 py-3 text-sm font-bold uppercase tracking-wide"
-              >
-                Notify when on sale
-              </button>
-            </form>
-          </div>
-
-          <div className="md:col-span-3">
-            <div className="prose max-w-none">
-              <p>{currentProduct[0].description}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      */}
         </section>
       ) : (
         <Loading />

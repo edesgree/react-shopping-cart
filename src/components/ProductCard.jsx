@@ -8,9 +8,9 @@ export default function ProductCard({ product }) {
       className="block overflow-hidden group"
     >
       <img
-        src={product.image}
+        src={product.thumbnail}
         alt={product.title}
-        className="h-[350px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[450px]"
+        className="h-[150px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[150px]"
       />
 
       <div className="relative pt-3 bg-white">
@@ -21,10 +21,7 @@ export default function ProductCard({ product }) {
         <p className="mt-2">
           <span className="sr-only"> Regular Price </span>
 
-          <span className="tracking-wider text-gray-900">
-            {' '}
-            £{product.price} GBP{' '}
-          </span>
+          <span className="tracking-wider text-gray-900">${product.price}</span>
         </p>
       </div>
     </NavLink>

@@ -49,7 +49,7 @@ export default function Products({
             filterProduct={filterProduct}
             selectedCat={selectedCat}
           />
-          <ul className="grid gap-4 mt-8 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="grid gap-4 mt-8 sm:grid-cols-2 md:grid-cols-4">
             {productsElements}
           </ul>
         </div>

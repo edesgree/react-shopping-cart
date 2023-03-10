@@ -18,13 +18,15 @@ function App() {
   const [cartCount, setCartCount] = useState(0);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
-  const PRODUCTS_AMOUNT = 10;
+  const PRODUCTS_AMOUNT = 12;
 
-  const fetchProducts = async (PRODUCTS_AMOUNT) => {
-    const productUrl = `https://fakestoreapi.com/products?limit=${PRODUCTS_AMOUNT}`;
+  const fetchProducts = async (amount) => {
+    const productUrl2 = `https://fakestoreapi.com/products?limit=${amount}`;
+    const productUrl = `https://dummyjson.com/products?limit=${amount}`;
     const response = await fetch(productUrl);
     const products = await response.json();
-    return products;
+    console.log(products);
+    return products.products;
   };
   const handleAddToCart = (product) => {
     //update cart item quantity if already in cart
@@ -76,7 +78,7 @@ function App() {
   };
   useEffect(() => {
     async function fetchData() {
-      const data = await fetchProducts();
+      const data = await fetchProducts(PRODUCTS_AMOUNT);
       setProducts(data);
       const uniqueCategories = [
         // make a list of existing category using a Set on all products
