@@ -88,7 +88,6 @@ $ring-size: 4;
 }
 button {
   &::before {
-    background: $green;
     content: '';
     display: block;
     height: 100%;

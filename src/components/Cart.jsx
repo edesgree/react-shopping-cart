@@ -114,9 +114,9 @@ export default function Cart({ cart, setCart, handleUpdateQty }) {
               </NavLink>
               <button
                 type="button"
-                className="px-6 py-2 border rounded-md dark:bg-violet-400 dark:text-gray-900 dark:border-violet-400"
+                className="tracking-wide  overflow-hidden rounded relative inline-flex group items-center justify-center px-3.5 py-2 cursor-pointer border-b-4 border-l-2 active:border-violet-600 active:bg-violet-400	before:bg-violet-800 active:shadow-none shadow-lg bg-gradient-to-tr from-violet-600 to-violet-500 border-violet-700 text-white"
               >
-                <span className="sr-only sm:not-sr-only">Continue to</span>
+                <span className="sr-only sm:not-sr-only">Continue to </span>
                 Checkout
               </button>
             </div>
