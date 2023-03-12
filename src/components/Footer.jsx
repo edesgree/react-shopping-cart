@@ -1,7 +1,7 @@
 import React from 'react';
 import Logo from './Ui/Logo';
 import { NavLink } from 'react-router-dom';
-export default function Footer(props) {
+export default function Footer() {
   return (
     <>
       <footer aria-label="Site Footer" className="bg-gray-50">
@@ -17,6 +17,7 @@ export default function Footer(props) {
                 href="https://github.com/edesgree"
                 target="_blank"
                 rel="noopener"
+                class="font-medium text-violet-600 dark:text-violet-500 hover:underline"
               >
                 edesgree
               </a>
