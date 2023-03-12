@@ -8,6 +8,7 @@ export default function Product({ products, handleAddToCart }) {
   // get corresponding data for this product
   const [btnClick, setBtnClick] = React.useState(false);
   //const [rating,setRating]=React.useState(currentProduct.rating)
+  console.log('products', products);
   const currentProduct = products.find(
     (product) => product.id === parseInt(productId)
   );
@@ -37,7 +38,7 @@ export default function Product({ products, handleAddToCart }) {
   };
   return (
     <>
-      {currentProduct.title ? (
+      {currentProduct ? (
         <section>
           <div className="relative mx-auto max-w-screen-xl px-4 py-8">
             <div className="grid grid-cols-1 items-start gap-8 md:grid-cols-2">

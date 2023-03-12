@@ -21,7 +21,7 @@ function App() {
   const PRODUCTS_AMOUNT = 20;
 
   const fetchProducts = async (amount) => {
-    const productUrl2 = `https://fakestoreapi.com/products?limit=${amount}`;
+    //const productUrl2 = `https://fakestoreapi.com/products?limit=${amount}`;
     const productUrl = `https://dummyjson.com/products?limit=${amount}`;
 
     const response = await fetch(productUrl);
@@ -31,13 +31,10 @@ function App() {
     }
     const products = await response.json();
     return products.products;
-
-    console.log(products);
   };
   const handleAddToCart = (product) => {
     //update cart item quantity if already in cart
     if (cart.some((cartItem) => cartItem.id === product.id)) {
-      console.log('already in cart');
       setCart((cart) =>
         cart.map((cartItem) =>
           cartItem.id === product.id
@@ -50,15 +47,12 @@ function App() {
       );
     } else {
       // Add to cart
-      console.log('no in cart yet');
       setCart([
         ...cart,
         { ...product, amount: 1 } // initial amount 1
       ]);
       setCartCount((cartCount) => cartCount + 1);
     }
-    console.log('cart', cart);
-    console.log('cartCount', cartCount);
   };
   const handleUpdateQty = (productId, number) => {
     setCart((cart) =>
@@ -79,7 +73,6 @@ function App() {
   const getCartCount = () => {
     let totalCount = 0;
     cart.map((item) => (totalCount += item.amount));
-    console.log('totalCount', totalCount);
     return totalCount;
   };
   useEffect(() => {
