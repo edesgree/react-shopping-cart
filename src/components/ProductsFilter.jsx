@@ -13,7 +13,7 @@ export default function ProductsFilter({
         key={category}
         onClick={() => filterProduct(category)}
         className={classNames(filterBtnClass, {
-          'active [&.active]:bg-blue-400': category === selectedCat
+          'active [&.active]:bg-violet-400': category === selectedCat
         })}
       >
         {category}

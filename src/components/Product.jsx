@@ -7,8 +7,7 @@ export default function Product({ products, handleAddToCart }) {
   const { productId, productTitle } = useParams();
   // get corresponding data for this product
   const [btnClick, setBtnClick] = React.useState(false);
-  //const [rating,setRating]=React.useState(currentProduct.rating)
-  console.log('products', products);
+
   const currentProduct = products.find(
     (product) => product.id === parseInt(productId)
   );
@@ -36,6 +35,7 @@ export default function Product({ products, handleAddToCart }) {
       );
     });
   };
+
   return (
     <>
       {currentProduct ? (

@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import FormQuantityInput from './Ui/FormQuantityInput';
 export default function Cart({ cart, setCart, handleUpdateQty }) {
   console.log('my cart', cart);
@@ -10,6 +10,11 @@ export default function Cart({ cart, setCart, handleUpdateQty }) {
     (total, item) => total + item.amount * item.price,
     0
   );
+
+  const navigate = useNavigate();
+  const goBack = () => {
+    navigate(-1);
+  };
   return (
     <section>
       <div className="max-w-screen-xl flex flex-col  p-6 space-y-4 sm:p-10 dark:bg-gray-900 dark:text-gray-100">
@@ -104,14 +109,14 @@ export default function Cart({ cart, setCart, handleUpdateQty }) {
               </p>
             </div>
             <div className="flex justify-end space-x-4">
-              <NavLink to="/products">
-                <button
-                  type="button"
-                  className="px-6 py-2 border rounded-md dark:border-violet-400"
-                >
-                  Back to shop
-                </button>
-              </NavLink>
+              <button
+                type="button"
+                onClick={goBack}
+                className="px-6 py-2 border rounded-md dark:border-violet-400"
+              >
+                Back to shop
+              </button>
+
               <button
                 type="button"
                 className="tracking-wide  overflow-hidden rounded relative inline-flex group items-center justify-center px-3.5 py-2 cursor-pointer border-b-4 border-l-2 active:border-violet-600 active:bg-violet-400	before:bg-violet-800 active:shadow-none shadow-lg bg-gradient-to-tr from-violet-600 to-violet-500 border-violet-700 text-white"
