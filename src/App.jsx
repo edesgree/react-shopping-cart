@@ -1,8 +1,7 @@
 import { useEffect, useState, Suspense, lazy } from 'react';
-import { Routes, Route, NavLink } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import NoMatch from './components/NoMatch';
-import { capitalizeFirstLetter, shuffleArray } from './utils/utils';
 import Loading from './components/Ui/Loading';
 
 // PAGES
@@ -11,7 +10,6 @@ const Products = lazy(() => import('./components/Products'));
 const Product = lazy(() => import('./components/Product'));
 const Cart = lazy(() => import('./components/Cart'));
 function App() {
-  const [count, setCount] = useState(0);
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [cart, setCart] = useState(
@@ -23,7 +21,6 @@ function App() {
   const PRODUCTS_AMOUNT = 20;
 
   const fetchProducts = async (amount) => {
-    //const productUrl2 = `https://fakestoreapi.com/products?limit=${amount}`;
     const productUrl = `https://dummyjson.com/products?limit=${amount}`;
 
     const response = await fetch(productUrl);
