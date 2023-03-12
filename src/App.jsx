@@ -14,7 +14,9 @@ function App() {
   const [count, setCount] = useState(0);
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(
+    JSON.parse(localStorage.getItem('cart')) || []
+  );
   const [cartCount, setCartCount] = useState(0);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
@@ -90,6 +92,7 @@ function App() {
   }, []);
   useEffect(() => {
     setCartCount(getCartCount());
+    localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
   return (
     <Suspense fallback={<Loading />}>
