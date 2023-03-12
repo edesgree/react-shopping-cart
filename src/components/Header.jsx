@@ -2,12 +2,6 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Logo from './Ui/Logo';
 export default function Header({ cartCount }) {
-  const navigation = [
-    { title: 'Home', path: '/' },
-    { title: 'Products', path: '/products' },
-    { title: 'Product', path: '/product' },
-    { title: 'Cart', path: '/cart' }
-  ];
   const [mobileMenu, setmobileMenu] = React.useState(false);
   return (
     <>

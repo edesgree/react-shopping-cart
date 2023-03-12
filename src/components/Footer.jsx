@@ -12,12 +12,12 @@ export default function Footer() {
             </div>
 
             <p className="mt-4 text-center text-sm text-gray-500 lg:mt-0 lg:text-right">
-              Copyright &copy; 2023{' '}
+              Copyright &copy; 2023
               <a
                 href="https://github.com/edesgree"
                 target="_blank"
                 rel="noopener"
-                class="font-medium text-violet-600 dark:text-violet-500 hover:underline"
+                className="font-medium text-violet-600 dark:text-violet-500 hover:underline"
               >
                 edesgree
               </a>

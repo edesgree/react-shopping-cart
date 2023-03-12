@@ -1,5 +1,4 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import ProductCard from './ProductCard';
 import ProductsFilter from './ProductsFilter';
 export default function Products({

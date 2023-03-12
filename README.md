@@ -30,6 +30,7 @@ Products are fetch from a fake store api.
 - cart content kept in localstorage
 - responsive design
 - tests via `@testing-library/react`
+- use of `classNames`
 
 ## What I learned
 

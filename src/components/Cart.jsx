@@ -168,8 +168,7 @@ export default function Cart({ cart, setCart, handleUpdateQty, emptyCart }) {
                 onClick={() => setShowCheckoutModal(true)}
                 className="tracking-wide  overflow-hidden rounded relative inline-flex group items-center justify-center px-3.5 py-2 cursor-pointer border-b-4 border-l-2 active:border-violet-600 active:bg-violet-400	before:bg-violet-800 active:shadow-none shadow-lg bg-gradient-to-tr from-violet-600 to-violet-500 border-violet-700 text-white"
               >
-                <span className="sr-only sm:not-sr-only">Continue to </span>
-                Checkout
+                Continue to Checkout
               </button>
             </div>
           </>

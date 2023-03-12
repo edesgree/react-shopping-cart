@@ -11,7 +11,7 @@ export default function Product({ products, handleAddToCart }) {
   const currentProduct = products.find(
     (product) => product.id === parseInt(productId)
   );
-  const handleChangeButtonColor = (btn) => {
+  const handleChangeButtonColor = () => {
     setBtnClick(true);
     setTimeout(() => {
       setBtnClick(false);
