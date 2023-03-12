@@ -77,6 +77,9 @@ function App() {
     cart.map((item) => (totalCount += item.amount));
     return totalCount;
   };
+  const emptyCart = () => {
+    setCart([]);
+  };
   useEffect(() => {
     async function fetchData() {
       const data = await fetchProducts(PRODUCTS_AMOUNT);
@@ -126,6 +129,7 @@ function App() {
               <Cart
                 cart={cart}
                 setCart={setCart}
+                emptyCart={emptyCart}
                 handleUpdateQty={handleUpdateQty}
               />
             }

@@ -1,8 +1,9 @@
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import FormQuantityInput from './Ui/FormQuantityInput';
-export default function Cart({ cart, setCart, handleUpdateQty }) {
-  console.log('my cart', cart);
+export default function Cart({ cart, setCart, handleUpdateQty, emptyCart }) {
+  const [showCheckoutModal, setShowCheckoutModal] = React.useState(false);
+
   const handleDelete = (productId) => {
     setCart((cart) => cart.filter((item) => item.id !== productId));
   };
@@ -10,13 +11,58 @@ export default function Cart({ cart, setCart, handleUpdateQty }) {
     (total, item) => total + item.amount * item.price,
     0
   );
-
+  const handlePay = () => {
+    emptyCart();
+    setShowCheckoutModal(false);
+  };
   const navigate = useNavigate();
   const goBack = () => {
     navigate(-1);
   };
   return (
     <section>
+      {showCheckoutModal ? (
+        <>
+          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+            <div className="relative w-auto my-6 mx-auto max-w-3xl">
+              {/*content*/}
+              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                <div className="p-8 text-center sm:p-12">
+                  <p className="text-sm font-semibold uppercase tracking-widest text-pink-500">
+                    Your order is on the way
+                  </p>
+
+                  <h2 className="mt-6 text-3xl font-bold">
+                    Thanks for your purchase, we're getting it ready!
+                  </h2>
+                  <p className="mt-6 ">
+                    <small>Checkout not functional in this demo.</small>
+                  </p>
+                </div>
+
+                {/*footer*/}
+                <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+                  <button
+                    className="text-violet-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    type="button"
+                    onClick={() => setShowCheckoutModal(false)}
+                  >
+                    Close
+                  </button>
+                  <button
+                    className="tracking-wide  overflow-hidden rounded relative inline-flex group items-center justify-center px-3.5 py-2 cursor-pointer border-b-4 border-l-2 active:border-violet-600 active:bg-violet-400	before:bg-violet-800 active:shadow-none shadow-lg bg-gradient-to-tr from-violet-600 to-violet-500 border-violet-700 text-whitebg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    type="button"
+                    onClick={handlePay}
+                  >
+                    Reset Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+        </>
+      ) : null}
       <div className="max-w-screen-xl flex flex-col  p-6 space-y-4 sm:p-10 dark:bg-gray-900 dark:text-gray-100">
         <h2 className="text-xl font-semibold">Your cart</h2>
         {cart.length > 0 ? (
@@ -119,6 +165,7 @@ export default function Cart({ cart, setCart, handleUpdateQty }) {
 
               <button
                 type="button"
+                onClick={() => setShowCheckoutModal(true)}
                 className="tracking-wide  overflow-hidden rounded relative inline-flex group items-center justify-center px-3.5 py-2 cursor-pointer border-b-4 border-l-2 active:border-violet-600 active:bg-violet-400	before:bg-violet-800 active:shadow-none shadow-lg bg-gradient-to-tr from-violet-600 to-violet-500 border-violet-700 text-white"
               >
                 <span className="sr-only sm:not-sr-only">Continue to </span>

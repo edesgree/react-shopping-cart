@@ -26,7 +26,7 @@ export default function ProductsFilter({
         {filterButtons}
         <button
           className={classNames(filterBtnClass, {
-            'active [&.active]:bg-blue-400': selectedCat === 'All'
+            'active [&.active]:bg-violet-400': selectedCat === 'All'
           })}
           onClick={() => filterProduct('All')}
         >
